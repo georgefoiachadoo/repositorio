@@ -21,7 +21,8 @@ public class Caixa {
 		  return -1;
 	  }
 	}
-	public boolean efetuaSaque(int numeroDaConta, double valor, int senha) {
+	public boolean efetuaSaque(int numeroDaConta,
+			double valor, int senha) {
 		if(valor < 0 || (valor%50) != 0 || valor > 500 || valor > this.saldo) {
 			return false;
 		}

@@ -8,14 +8,14 @@ public class Conta {
 	private double saldo;
 	private Lancamento[] lancamentos;
 	private int ultimoLancamento;
-	private HistoricoDeLancamentos HistoricoDeLancamentos;
+	private HistoricoDeLancamentos historicoDeLancamentos;
 
 	public Conta(int numero, Cliente titular, int senha, double saldo) {
 		this.numero = numero;
 		this.titular = titular;
 		this.senha = senha;
 		this.saldo = saldo;
-		this.HistoricoDeLancamentos = new HistoricoDeLancamentos(10);
+		this.historicoDeLancamentos = new HistoricoDeLancamentos(10);
 	}
 
 	public Cliente getTitular() {
@@ -34,8 +34,8 @@ public class Conta {
 		if (valor < 0) {
 			return false;
 		}
-		this.realizaLancamento(operacaoBancaria, -valor);
-		this.saldo+= valor;
+		this.historicoDeLancamentos.realizaLancamento(operacaoBancaria, -valor);
+		this.saldo += valor;
 		return true;
 	}
 
@@ -46,37 +46,23 @@ public class Conta {
 		return -1;
 	}
 
-	public boolean debitaValor(double valor, int senha,
-		String operacaoBancaria) {
-			if (!senhaEhValida(senha) | valor > this.saldo | valor < 0) {
+	public boolean debitaValor(double valor, int senha, String operacaoBancaria) {
+		if (!senhaEhValida(senha) | valor > this.saldo | valor < 0) {
 			return false;
-			}
-			
-			this.realizaLancamento(operacaoBancaria, -valor);
-			this.saldo -= valor;
-			return true;
+		}
+
+		this.historicoDeLancamentos.realizaLancamento(operacaoBancaria, -valor);
+		this.saldo -= valor;
+		return true;
 	}
-	private void realizaLancamento(String descricao, double valor) {
-		if(this.ultimoLancamento == 10) {
-		for(int i = 1; i < 10; i++) {
-		this.lancamentos[i-1] = this.lancamentos[i];
-		}
-		}
-		else {
-		this.ultimoLancamento++;
-		}
-		this.lancamentos[this.ultimoLancamento] =
-		new Lancamento(descricao, valor);
-		}
-	
+
+
 	private boolean senhaEhValida(int senha) {
-		if(senha == this.senha) {
+		if (senha == this.senha) {
 			return true;
 		}
-	
+
 		return false;
 	}
-	
-	
 
 }

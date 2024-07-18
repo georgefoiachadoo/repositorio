@@ -63,7 +63,7 @@ public class Terminal {
   
   private int getInt(String string) {
 	  Scanner r = new Scanner(System.in);
-	  System.out.println("Entre com" + string);
+	  System.out.println("Entre com " + string);
 	  
 	  if(r.hasNextInt()) {
 		  return r.nextInt();
