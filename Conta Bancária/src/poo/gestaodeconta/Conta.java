@@ -30,13 +30,15 @@ public class Conta {
 		return this.numero;
 	}
 
-	public boolean creditaValor(double valor, String operacaoBancaria) {
-		if (valor < 0) {
+	public boolean creditaValor(double valor, String operacaoBancaria, int senha) {
+		if (valor >= 0 & senhaEhValida(senha) == true) {
+			this.historicoDeLancamentos.realizaLancamento(operacaoBancaria, -valor);
+			this.saldo += valor;
+			return true;
+		} else {
+
 			return false;
 		}
-		this.historicoDeLancamentos.realizaLancamento(operacaoBancaria, -valor);
-		this.saldo += valor;
-		return true;
 	}
 
 	public double verificaSaldo(int senha) {
@@ -55,7 +57,6 @@ public class Conta {
 		this.saldo -= valor;
 		return true;
 	}
-
 
 	private boolean senhaEhValida(int senha) {
 		if (senha == this.senha) {

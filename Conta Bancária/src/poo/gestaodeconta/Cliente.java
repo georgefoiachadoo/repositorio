@@ -1,10 +1,10 @@
 package poo.gestaodeconta;
 
 public class Cliente {
-	
+
 	private String cpf;
 	private String nome;
-	
+
 	public Cliente(String cpf, String nome) {
 		this.cpf = cpf;
 		this.nome = nome;
@@ -21,11 +21,9 @@ public class Cliente {
 	public String getCpf() {
 		return this.cpf;
 	}
-	
+
 	public String toString() {
-		return "Nome: " + this.nome +
-				"\nCPF: " + this.cpf;
+		return "Nome: " + this.nome + "\nCPF: " + this.cpf;
 	}
-	
 
 }
